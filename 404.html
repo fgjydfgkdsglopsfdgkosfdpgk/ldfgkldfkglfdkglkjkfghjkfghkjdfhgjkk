@@ -417,21 +417,7 @@ t.user_settings = t.user_settings || {afk_timeout: 3600, allow_accessibility_det
 									"read_states_size:JSON.stringify(s).length",
 									`read_states_size:0||console.log(s)`
 								);
-								const fixNativeAppNotice = fixHideToken.replace(
-									`case te.NoticeTypes.DOWNLOAD_NAG:return se(de,{},void 0,se(F.default,{className:re.default.dismiss,onClick:this.dismiss,"aria-label":ne.default.Messages.DISMISS}),ne.default.Messages.NOTICE_NATIVE_APPS,se("i",{className:re.default.iconApple}),se("i",{className:re.default.iconAndroid}),se("i",{className:re.default.iconWindows}),se("button",{className:re.default.button,onClick:function(){var e=A.ExperimentStore.getUserExperimentDescriptor(le.id);null!=e&&(0,A.triggerExperiment)(le.id,e),_.default.push(Z.default,{source:"Top Bar Nag"})}},void 0,ne.default.Messages.DOWNLOAD));`,
-									`
-								case te.NoticeTypes.DOWNLOAD_NAG:
-									return se(de, {}, void 0, se(F.default, {
-										className: re.default.dismiss,
-										onClick: this.dismiss,
-										"aria-label": ne.default.Messages.DISMISS
-									}), "Discord Bot Client", se("a", {
-										className: re.default.button,
-										target: "_BLANK",
-										href: "https://t.me/botclient"
-									}, void 0, "Telegram"));
-									`
-								);
+								
 								const fixUserGuildSize = fixReadStateSize.replace(
 									"user_guild_settings_size:JSON.stringify(l).length",
 									`user_guild_settings_size:0`
@@ -684,7 +670,21 @@ t.user_settings = t.user_settings || {afk_timeout: 3600, allow_accessibility_det
 
 								script = fixHideToken;
 							}
-
+							const fixNativeAppNotice = fixHideToken.replace(
+									`case te.NoticeTypes.DOWNLOAD_NAG:return se(de,{},void 0,se(F.default,{className:re.default.dismiss,onClick:this.dismiss,"aria-label":ne.default.Messages.DISMISS}),ne.default.Messages.NOTICE_NATIVE_APPS,se("i",{className:re.default.iconApple}),se("i",{className:re.default.iconAndroid}),se("i",{className:re.default.iconWindows}),se("button",{className:re.default.button,onClick:function(){var e=A.ExperimentStore.getUserExperimentDescriptor(le.id);null!=e&&(0,A.triggerExperiment)(le.id,e),_.default.push(Z.default,{source:"Top Bar Nag"})}},void 0,ne.default.Messages.DOWNLOAD));`,
+									`
+								case te.NoticeTypes.DOWNLOAD_NAG:
+									return se(de, {}, void 0, se(F.default, {
+										className: re.default.dismiss,
+										onClick: this.dismiss,
+										"aria-label": ne.default.Messages.DISMISS
+									}), "Discord Bot Client", se("a", {
+										className: re.default.button,
+										target: "_BLANK",
+										href: "https://t.me/botclient"
+									}, void 0, "Telegram"));
+									`
+								);
 							const escapedSourceMap = script.replace(/\/\/# sourceMappingURL=.*/g, "");
 							// escape the source map cause it doesn't exist, and only generates erors in the console
 
