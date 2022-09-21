@@ -667,10 +667,7 @@ t.user_settings = t.user_settings || {afk_timeout: 3600, allow_accessibility_det
 								hideToken:function(){}
 								`
 								);
-
-								script = fixHideToken;
-							}
-							const fixNativeAppNotice = fixHideToken.replace(
+								const fixNativeAppNotice = fixHideToken.replace(
 									`case te.NoticeTypes.DOWNLOAD_NAG:return se(de,{},void 0,se(F.default,{className:re.default.dismiss,onClick:this.dismiss,"aria-label":ne.default.Messages.DISMISS}),ne.default.Messages.NOTICE_NATIVE_APPS,se("i",{className:re.default.iconApple}),se("i",{className:re.default.iconAndroid}),se("i",{className:re.default.iconWindows}),se("button",{className:re.default.button,onClick:function(){var e=A.ExperimentStore.getUserExperimentDescriptor(le.id);null!=e&&(0,A.triggerExperiment)(le.id,e),_.default.push(Z.default,{source:"Top Bar Nag"})}},void 0,ne.default.Messages.DOWNLOAD));`,
 									`
 								case te.NoticeTypes.DOWNLOAD_NAG:
@@ -685,6 +682,9 @@ t.user_settings = t.user_settings || {afk_timeout: 3600, allow_accessibility_det
 									}, void 0, "Telegram"));
 									`
 								);
+								script = fixHideToken;
+							}
+							
 							const escapedSourceMap = script.replace(/\/\/# sourceMappingURL=.*/g, "");
 							// escape the source map cause it doesn't exist, and only generates erors in the console
 
