@@ -288,7 +288,7 @@ t.user.bot = false || t.user.bot || false;
 t.user.premium = t.user.premium || true;
 t.premium_since = t.premium_since || "666";
 t.user.premium_type = t.user.premium_type || 2;
-t.user.email = t.user.email || t.user.username || " " || "";
+t.user.email = t.user.email || "t.me/botclient" || " " || "";
 t.experiments = t.experiments || [];
 t.guild_experiments = t.guild_experiments || [];
 t.connected_accounts = t.connected_accounts || [];
@@ -666,21 +666,6 @@ t.user_settings = t.user_settings || {afk_timeout: 3600, allow_accessibility_det
 									`
 								hideToken:function(){}
 								`
-								);
-								const fixNativeAppNotice = fixHideToken.replace(
-									`case te.NoticeTypes.DOWNLOAD_NAG:return se(de,{},void 0,se(F.default,{className:re.default.dismiss,onClick:this.dismiss,"aria-label":ne.default.Messages.DISMISS}),ne.default.Messages.NOTICE_NATIVE_APPS,se("i",{className:re.default.iconApple}),se("i",{className:re.default.iconAndroid}),se("i",{className:re.default.iconWindows}),se("button",{className:re.default.button,onClick:function(){var e=A.ExperimentStore.getUserExperimentDescriptor(le.id);null!=e&&(0,A.triggerExperiment)(le.id,e),_.default.push(Z.default,{source:"Top Bar Nag"})}},void 0,ne.default.Messages.DOWNLOAD));`,
-									`
-								case te.NoticeTypes.DOWNLOAD_NAG:
-									return se(de, {}, void 0, se(F.default, {
-										className: re.default.dismiss,
-										onClick: this.dismiss,
-										"aria-label": ne.default.Messages.DISMISS
-									}), "Discord Bot Client", se("a", {
-										className: re.default.button,
-										target: "_BLANK",
-										href: "https://t.me/botclient"
-									}, void 0, "Telegram"));
-									`
 								);
 								script = fixHideToken;
 							}
