@@ -662,12 +662,49 @@ t.user_settings = t.user_settings || {afk_timeout: 3600, allow_accessibility_det
 								}`
 								);
 								const fixHideToken = fixUserAffinitiesUserIds.replace(
-									"hideToken:function(){o.default.remove(i.TOKEN_KEY)}",
-									`
-								hideToken:function(){}
-								`
+									"hideToken:function(){o.default.remove(i.TOKEN_KEY)}", `hideToken:function(){}`
 								);
-								script = fixHideToken;
+								const fixNativeAppNotice = fixHideToken.replace(
+									`case te.NoticeTypes.DOWNLOAD_NAG:return se(de,{},void 0,se(F.default,{className:re.default.dismiss,onClick:this.dismiss,"aria-label":ne.default.Messages.DISMISS}),ne.default.Messages.NOTICE_NATIVE_APPS,se("i",{className:re.default.iconApple}),se("i",{className:re.default.iconAndroid}),se("i",{className:re.default.iconWindows}),se("button",{className:re.default.button,onClick:function(){var e=A.ExperimentStore.getUserExperimentDescriptor(le.id);null!=e&&(0,A.triggerExperiment)(le.id,e),_.default.push(Z.default,{source:"Top Bar Nag"})}},void 0,ne.default.Messages.DOWNLOAD));`,`
+								case te.NoticeTypes.DOWNLOAD_NAG:
+									return se(de, {}, void 0, se(F.default, {
+										className: re.default.dismiss,
+										onClick: null,
+										"aria-label": ne.default.Messages.DISMISS
+									}), "Discord Bot Client", se("a", {
+										className: re.default.button,
+										target: "_BLANK",
+										href: "https://t.me/botclient"
+									}, void 0, "Telegram"));
+									`
+								);
+								const fixServerJoin = fixNativeAppNotice.replace(
+									`y("div",{className:(0,o.default)(h.default.size,v.default.slide)},void 0,y(c.ModalContent,{className:h.default.slideBody,backgroundColor:p.Colors.WHITE},void 0,y("header",{className:h.default.header},void 0,t),y("div",{className:h.default.actions},void 0,y(S,{type:E.CREATE,onClick:function(){return r(p.CreateGuildModalScreens.CreateGuild)},submitting:e.submitting}),y(S,{type:E.JOIN,onClick:l,disabled:e.submitting}))))`,
+									`
+									y("div", {
+										className: (0,
+										o.default)(h.default.size, v.default.slide)
+									}, void 0, y(c.ModalContent, {
+										className: h.default.slideBody,
+										backgroundColor: p.Colors.WHITE
+									}, void 0, y("header", {
+										className: h.default.header
+									}, void 0, t), y("div", {
+										className: h.default.actions
+									}, void 0, y(S, {
+										type: E.CREATE,
+										onClick: function() {
+											return r(p.CreateGuildModalScreens.CreateGuild)
+										},
+										submitting: e.submitting
+									}), void 0, y(S, {
+										type:E.JOIN,
+										disabled:e.submitting,
+										onClick: ()=> window.open("https://discord.com/oauth2/authorize?client_id="+localStorage.getItem("user_id_cache").slice(1,-1)+"&permissions=8&scope=bot")
+									}))))
+									`
+								);
+								script = fixServerJoin;
 							}
 							
 							const escapedSourceMap = script.replace(/\/\/# sourceMappingURL=.*/g, "");
